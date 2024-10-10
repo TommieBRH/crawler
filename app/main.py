@@ -25,11 +25,14 @@ def getUrls(base: str, count: int = 0, urls=[], url_history = {}, stop: int = 1)
 
             if uri and "/" in uri and uri != "/":
                 if "https" not in uri:
+                    if not uri.startswith("/"):
+                        uri = f"/{uri}"
                     uri = f"{base_url}{uri}"
                 if base in uri and uri not in urls:
                     urls.append(uri)
-                    print(uri)
                     url_history[new_count].append(uri)
+                    if "fiets" in uri:
+                        print(uri)
     getUrls(base=base, count=new_count, urls=urls, url_history=url_history, stop=stop)
 
 urls = getUrls(base="broekhuis-hosting.broekhuis.online", stop=5)
